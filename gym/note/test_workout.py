@@ -26,10 +26,9 @@ class TestWorkout(TestCase):
             workout_muffin.title, "Muffin")
 
 
-
 client = Client()
 
-class TestGetAllPuppies(TestCase):
+class TestGetAllWorkouts(TestCase):
     """ Test module for GET all puppies API """
 
     def setUp(self):
@@ -40,5 +39,11 @@ class TestGetAllPuppies(TestCase):
 
     def test_get_all_workout(self):
 
-        response = client.get('http://127.0.0.1:8080/api/workout/')
+        response = client.get('/api/workout/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+    def test_get_one_workout(self):
+
+        response = client.get('/api/workout/2/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
