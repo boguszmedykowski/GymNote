@@ -1,1 +1,4 @@
-{{ data.content }}
+{% for workout in data %}
+    <h1>{{ workout.title }}</h1>
+{% endfor %}
+
