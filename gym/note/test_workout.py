@@ -9,7 +9,6 @@ from django.test import TestCase, Client
 
 
 class TestWorkout(TestCase):
-    """ Test module for Workout model """
 
     def setUp(self):
         Workout.objects.create(
@@ -29,7 +28,6 @@ class TestWorkout(TestCase):
 client = Client()
 
 class TestGetAllWorkouts(TestCase):
-    """ Test module for GET all puppies API """
 
     def setUp(self):
         Workout.objects.create(

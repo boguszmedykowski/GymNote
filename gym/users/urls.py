@@ -6,6 +6,6 @@ router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 
 urlpatterns = [
-    path('api/', include(router.urls)),
-    path('api/registration/', RegistrationAPIView.as_view(), name="registration")
+    path('', include(router.urls)),
+    path('registration/', RegistrationAPIView.as_view(), name="registration")
 ]

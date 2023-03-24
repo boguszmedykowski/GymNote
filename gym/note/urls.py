@@ -6,5 +6,5 @@ router = routers.DefaultRouter()
 router.register(r'workout', WorkoutViewSet)
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
 ]
