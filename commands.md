@@ -22,3 +22,6 @@ git rm plik
 git push --force origin main
 
 git checkout -b nazwa
+
+git fetch
+git reset --hard origin/<nazwa_gałęzi>

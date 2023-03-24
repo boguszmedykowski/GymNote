@@ -31,7 +31,7 @@ class TestUser(TestCase):
 
 client = Client()
 
-class TestGetAllWorkouts(TestCase):
+class TestGetAllUsers(TestCase):
     """ Test module for GET all puppies API """
 
     def setUp(self):
@@ -47,10 +47,10 @@ class TestGetAllWorkouts(TestCase):
     def test_get_all_workout(self):
 
         response = client.get('/api/users/')
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
     def test_get_one_workout(self):
 
         response = client.get('/api/users/2/')
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
