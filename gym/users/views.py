@@ -14,7 +14,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class RegistrationAPIView(APIView):
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.AllowAny]
 
     def post(self, request):
         serializer = UserSerializer(data=request.data)
