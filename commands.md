@@ -15,3 +15,7 @@ docker save my-image > my-image.tar
 docker load < my-image.tar
 
 gunicorn gym.wsgi:application --bind 0.0.0.0:8000
+
+
+git ls-files
+git rm plik
