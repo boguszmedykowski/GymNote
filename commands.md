@@ -6,8 +6,10 @@ coverage run --omit='*/env/*' manage.py test
 coverage html
 
 #Docker
-sudo docker build django-on-docker -f Dockerfile .
-sudo docker run -it -p 80:8888 django-on-docker
+docker build -t nazwa_obrazu .
+docker run -p 8888:8888 nazwa_obrazu
+docker ps -a
+docker exec -it nazwa_kontenera sh
 
 
 
