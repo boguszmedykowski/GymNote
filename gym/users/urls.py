@@ -1,9 +1,9 @@
 from django.urls import path, include
 from rest_framework import routers
-from .views import WorkoutViewSet
+from .views import UserViewSet
 
 router = routers.DefaultRouter()
-router.register(r'workout', WorkoutViewSet)
+router.register(r'users', UserViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),

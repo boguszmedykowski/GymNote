@@ -20,3 +20,5 @@ gunicorn gym.wsgi:application --bind 0.0.0.0:8000
 git ls-files
 git rm plik
 git push --force origin main
+
+git checkout -b nazwa
