@@ -4,5 +4,5 @@ from .views import workouts
 
 
 urlpatterns = [
-    path('workouts/', workouts, name='workouts')
+    path('workouts/', workouts, name='workout_list')
 ]
