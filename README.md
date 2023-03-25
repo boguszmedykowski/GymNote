@@ -75,10 +75,6 @@ Richardson, L., & Ruby, S. (2007). RESTful Web Services. O'Reilly Media.
 
 Somerville, I. (2016). Software Engineering. Pearson.
 
-The Twelve-Factor App methodology. (n.d.). Retrieved from https://12factor.net/
-
-TutorialsPoint. (n.d.). Django REST Framework - Quick Guide. Retrieved from https://www.tutorialspoint.com/django_rest_framework/index.htm
-
 Wiliński, M. (2020). Django Rest Framework – krok po kroku. Helion.
 
 Żmudzki, P. (2019). Django – tworzenie zaawansowanych aplikacji internetowych. Helion.
