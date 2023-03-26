@@ -3,11 +3,14 @@
 import os
 import sys
 from gym.settings import base
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def main():
     """Run administrative tasks."""
 
-    if base.DEBUG == True:
+    if base.DEBUG:
         os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'gym.settings.local')
     else:
         os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'gym.settings.production')
