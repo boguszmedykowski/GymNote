@@ -1,5 +1,5 @@
 # drf-app
-
+Stwórz plik zmień nazwę pliku 'gym/gym/example.env' na 'gym/gym/.env'
 
 Jako pracę inżynierską chciałbym napisać oraz opisać aplikację webową wraz z jej deploymentem do usługi chmurowej.
 Zacząłem pisać rest api we frameworku Django wykorzystująć PostgreSQL. Aplikacja będzie zdokeryzowana. Napisałbym też do niej prosty front.
