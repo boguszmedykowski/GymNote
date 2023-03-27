@@ -1,4 +1,15 @@
+{% extends "../base/base.html" %}
+
+{% block title %}Workouts{% endblock  %}
+
+{% block temlate %}
+{% include "../base/navbar.html" %}
+
 {% for workout in data %}
     <h1>{{ workout.title }}</h1>
 {% endfor %}
+
+{% endblock %}
+
+
 

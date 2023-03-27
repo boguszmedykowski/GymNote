@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'note',
     'web',
     'users',
+    'dotenv',
 ]
 
 MIDDLEWARE = [
