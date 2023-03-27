@@ -1,7 +1,7 @@
 from django.shortcuts import render
 import requests
-from django.views.generic import ListView
-from note.models import Workout
+# from django.views.generic import ListView
+# from note.models import Workout
 
 
 # class HomeView(ListView):
@@ -18,6 +18,7 @@ def Home(request):
 
 def registration(request):
     return render(request, 'web/registration.html')
+
 
 def registration(request):
     return render(request, 'web/login.html')
