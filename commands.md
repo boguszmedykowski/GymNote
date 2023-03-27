@@ -13,6 +13,9 @@ docker exec -it nazwa_kontenera sh
 docker save my-image > my-image.tar
 docker load < my-image.tar
 
+
+
+./manage.py collectstatic
 gunicorn gym.wsgi:application --bind 0.0.0.0:8888
 
 
