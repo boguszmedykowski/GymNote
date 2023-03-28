@@ -24,7 +24,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_spectacular',
     'note',
-    'web',
     'users',
     'dotenv',
 ]
@@ -100,8 +99,8 @@ USE_I18N = True
 USE_TZ = True
 
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, '../web/static'),]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, '../web/static'),]
 
 STATIC_URL = 'static/'
 
