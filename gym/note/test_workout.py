@@ -3,7 +3,7 @@ from note.models import Workout
 
 from rest_framework import status
 from django.test import TestCase
-from django.contrib.auth.models import User
+from users.models import User
 from rest_framework.test import APIClient
 from django.urls import reverse
 from .serializers import WorkoutSerializer

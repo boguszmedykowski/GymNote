@@ -1,9 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User
+from users.models import User
 
 class Workout(models.Model):
     title = models.CharField(max_length=50)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
     description = models.TextField(max_length=500, blank=True, null=True)
 
