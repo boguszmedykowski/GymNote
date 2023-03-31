@@ -12,6 +12,12 @@ DEBUG = os.environ.get('DEBUG') == 'True'
 
 ALLOWED_HOSTS = ['*']
 
+ALLOWED_HOSTS.extend(
+    filter(
+        None,
+        os.environ.get('ALLOWED_HOSTS', '').split(','),
+    )
+)
 
 
 INSTALLED_APPS = [
@@ -111,7 +117,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
+    # 'TEST_REQUEST_DEFAULT_FORMAT': 'json',
 }
 
 
