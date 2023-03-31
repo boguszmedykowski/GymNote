@@ -1,10 +1,10 @@
 from django.urls import path, include
-from rest_framework import routers
+from rest_framework.routers import DefaultRouter
 from .views import *
 
 app_name='note'
 
-router = routers.DefaultRouter()
+router = DefaultRouter()
 router.register(r'workouts', WorkoutViewSet)
 router.register(r'exercise', ExerciseViewSet)
 

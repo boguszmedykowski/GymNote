@@ -8,6 +8,12 @@ class WorkoutSerializer(serializers.ModelSerializer):
         read_only_fields = ['id']
 
 
+
+class WorkoutDetailSerializer(WorkoutSerializer):
+    class Meta(WorkoutSerializer.Meta):
+        fields = WorkoutSerializer.Meta.fields + ['description']
+
+
 class ExerciseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Exercise
