@@ -3,17 +3,311 @@ info:
   title: ''
   version: 0.0.0
 paths:
-  /api/registration/:
-    post:
-      operationId: registration_create
+  /api/note/exercise/:
+    get:
+      operationId: note_exercise_list
       tags:
-      - registration
+      - note
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Exercise'
+          description: ''
+    post:
+      operationId: note_exercise_create
+      tags:
+      - note
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Exercise'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Exercise'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Exercise'
+        required: true
       security:
       - cookieAuth: []
       - basicAuth: []
       - {}
       responses:
         '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exercise'
+          description: ''
+  /api/note/exercise/{id}/:
+    get:
+      operationId: note_exercise_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this exercise.
+        required: true
+      tags:
+      - note
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exercise'
+          description: ''
+    put:
+      operationId: note_exercise_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this exercise.
+        required: true
+      tags:
+      - note
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Exercise'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Exercise'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Exercise'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exercise'
+          description: ''
+    patch:
+      operationId: note_exercise_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this exercise.
+        required: true
+      tags:
+      - note
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedExercise'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedExercise'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedExercise'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exercise'
+          description: ''
+    delete:
+      operationId: note_exercise_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this exercise.
+        required: true
+      tags:
+      - note
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/note/workout/:
+    get:
+      operationId: note_workout_list
+      tags:
+      - note
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Workout'
+          description: ''
+    post:
+      operationId: note_workout_create
+      tags:
+      - note
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Workout'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Workout'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Workout'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workout'
+          description: ''
+  /api/note/workout/{id}/:
+    get:
+      operationId: note_workout_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this workout.
+        required: true
+      tags:
+      - note
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workout'
+          description: ''
+    put:
+      operationId: note_workout_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this workout.
+        required: true
+      tags:
+      - note
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Workout'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Workout'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Workout'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workout'
+          description: ''
+    patch:
+      operationId: note_workout_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this workout.
+        required: true
+      tags:
+      - note
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedWorkout'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedWorkout'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedWorkout'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workout'
+          description: ''
+    delete:
+      operationId: note_workout_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this workout.
+        required: true
+      tags:
+      - note
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
           description: No response body
   /api/schema/:
     get:
@@ -159,158 +453,11 @@ paths:
                 type: object
                 additionalProperties: {}
           description: ''
-  /api/users/:
+  /api/user/users/:
     get:
-      operationId: users_list
+      operationId: user_users_list
       tags:
-      - users
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User'
-          description: ''
-    post:
-      operationId: users_create
-      tags:
-      - users
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/User'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/User'
-        required: true
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-          description: ''
-  /api/users/{id}/:
-    get:
-      operationId: users_retrieve
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this user.
-        required: true
-      tags:
-      - users
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-          description: ''
-    put:
-      operationId: users_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this user.
-        required: true
-      tags:
-      - users
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/User'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/User'
-        required: true
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-          description: ''
-    patch:
-      operationId: users_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this user.
-        required: true
-      tags:
-      - users
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedUser'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedUser'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PatchedUser'
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-          description: ''
-    delete:
-      operationId: users_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this user.
-        required: true
-      tags:
-      - users
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      responses:
-        '204':
-          description: No response body
-  /api/workout/:
-    get:
-      operationId: workout_list
-      tags:
-      - workout
+      - user
       security:
       - cookieAuth: []
       - basicAuth: []
@@ -322,23 +469,23 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Workout'
+                  $ref: '#/components/schemas/User'
           description: ''
     post:
-      operationId: workout_create
+      operationId: user_users_create
       tags:
-      - workout
+      - user
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Workout'
+              $ref: '#/components/schemas/User'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Workout'
+              $ref: '#/components/schemas/User'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Workout'
+              $ref: '#/components/schemas/User'
         required: true
       security:
       - cookieAuth: []
@@ -349,20 +496,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Workout'
+                $ref: '#/components/schemas/User'
           description: ''
-  /api/workout/{id}/:
+  /api/user/users/{id}/:
     get:
-      operationId: workout_retrieve
+      operationId: user_users_retrieve
       parameters:
       - in: path
         name: id
         schema:
           type: integer
-        description: A unique integer value identifying this workout.
+        description: A unique integer value identifying this user.
         required: true
       tags:
-      - workout
+      - user
       security:
       - cookieAuth: []
       - basicAuth: []
@@ -372,30 +519,30 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Workout'
+                $ref: '#/components/schemas/User'
           description: ''
     put:
-      operationId: workout_update
+      operationId: user_users_update
       parameters:
       - in: path
         name: id
         schema:
           type: integer
-        description: A unique integer value identifying this workout.
+        description: A unique integer value identifying this user.
         required: true
       tags:
-      - workout
+      - user
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Workout'
+              $ref: '#/components/schemas/User'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Workout'
+              $ref: '#/components/schemas/User'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Workout'
+              $ref: '#/components/schemas/User'
         required: true
       security:
       - cookieAuth: []
@@ -406,30 +553,30 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Workout'
+                $ref: '#/components/schemas/User'
           description: ''
     patch:
-      operationId: workout_partial_update
+      operationId: user_users_partial_update
       parameters:
       - in: path
         name: id
         schema:
           type: integer
-        description: A unique integer value identifying this workout.
+        description: A unique integer value identifying this user.
         required: true
       tags:
-      - workout
+      - user
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PatchedWorkout'
+              $ref: '#/components/schemas/PatchedUser'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/PatchedWorkout'
+              $ref: '#/components/schemas/PatchedUser'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/PatchedWorkout'
+              $ref: '#/components/schemas/PatchedUser'
       security:
       - cookieAuth: []
       - basicAuth: []
@@ -439,19 +586,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Workout'
+                $ref: '#/components/schemas/User'
           description: ''
     delete:
-      operationId: workout_destroy
+      operationId: user_users_destroy
       parameters:
       - in: path
         name: id
         schema:
           type: integer
-        description: A unique integer value identifying this workout.
+        description: A unique integer value identifying this user.
         required: true
       tags:
-      - workout
+      - user
       security:
       - cookieAuth: []
       - basicAuth: []
@@ -461,23 +608,54 @@ paths:
           description: No response body
 components:
   schemas:
+    Exercise:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        title:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+          maxLength: 500
+        workout:
+          type: string
+          format: uri
+      required:
+      - title
+      - url
+      - workout
+    PatchedExercise:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        title:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+          maxLength: 500
+        workout:
+          type: string
+          format: uri
     PatchedUser:
       type: object
       properties:
-        id:
-          type: integer
-          readOnly: true
         username:
           type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
-            only.
-          pattern: ^[\w.@+-]+$
-          maxLength: 150
+          maxLength: 255
         email:
           type: string
           format: email
-          title: Email address
-          maxLength: 254
+          maxLength: 255
         password:
           type: string
           writeOnly: true
@@ -492,31 +670,34 @@ components:
         title:
           type: string
           maxLength: 50
+        created_at:
+          type: string
+          format: date
+          readOnly: true
+        description:
+          type: string
+          nullable: true
+          maxLength: 500
+        created_by:
+          type: string
+          format: uri
     User:
       type: object
       properties:
-        id:
-          type: integer
-          readOnly: true
         username:
           type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
-            only.
-          pattern: ^[\w.@+-]+$
-          maxLength: 150
+          maxLength: 255
         email:
           type: string
           format: email
-          title: Email address
-          maxLength: 254
+          maxLength: 255
         password:
           type: string
           writeOnly: true
           maxLength: 128
       required:
-      - id
+      - email
       - password
-      - username
     Workout:
       type: object
       properties:
@@ -527,7 +708,20 @@ components:
         title:
           type: string
           maxLength: 50
+        created_at:
+          type: string
+          format: date
+          readOnly: true
+        description:
+          type: string
+          nullable: true
+          maxLength: 500
+        created_by:
+          type: string
+          format: uri
       required:
+      - created_at
+      - created_by
       - title
       - url
   securitySchemes:

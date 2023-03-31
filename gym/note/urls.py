@@ -2,9 +2,11 @@ from django.urls import path, include
 from rest_framework import routers
 from .views import *
 
+app_name='note'
+
 router = routers.DefaultRouter()
-router.register(r'workout', WorkoutViewSet, basename='workout')
-router.register(r'exercise', ExerciseViewSet, basename='exercise')
+router.register(r'workouts', WorkoutViewSet)
+router.register(r'exercise', ExerciseViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

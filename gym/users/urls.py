@@ -1,11 +1,13 @@
-from django.urls import path, include
-from rest_framework import routers
-from .views import UserViewSet
+from django.urls import path
+from users import views
 
-router = routers.DefaultRouter()
-router.register(r'users', UserViewSet)
+
+
+app_name = 'users'
 
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('create/', views.CreateUserView.as_view(), name='create'),
+    path('token/', views.CreateTokenView.as_view(), name='token'),
 ]
+

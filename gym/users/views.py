@@ -1,15 +1,19 @@
-from .serializers import UserSerializer
-from .models import User
-from rest_framework import viewsets, permissions
+from rest_framework import generics
+from users.serializers import (
+    AuthTokenSerializer,
+    UserSerializer,
+    )
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.settings import api_settings
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
+
+class CreateUserView(generics.CreateAPIView):
     serializer_class = UserSerializer
 
-    # def get_permissions(self):
-    #     if self.action == 'create':
-    #         permission_classes = [permissions.AllowAny]
-    #     else:
-    #         permission_classes = [permissions.IsAuthenticated]
-    #     return [permission() for permission in permission_classes]
+
+class CreateTokenView(ObtainAuthToken):
+    serializer_class = AuthTokenSerializer
+    renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
+
+

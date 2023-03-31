@@ -7,9 +7,8 @@ urlpatterns = [
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     path('admin/', admin.site.urls),
-
-    # path('', include('web.urls')),
-    path('api/user/', include('users.urls')),
-    path('api/note/', include('note.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+    path('api/note/', include('note.urls', namespace='note')),
+    path('api/user/', include(('users.urls'), namespace='user')),
 ]
