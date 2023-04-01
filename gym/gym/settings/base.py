@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'dotenv',
 ]
 
+TESTS = 'tests'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
