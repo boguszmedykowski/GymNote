@@ -18,6 +18,11 @@ class WorkoutViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.action == 'list':
             return WorkoutSerializer
+        else:
+            return self.serializer_class
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 class ExerciseViewSet(viewsets.ModelViewSet):
 

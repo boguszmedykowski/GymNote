@@ -4,7 +4,7 @@ from django.conf import settings
 
 class Workout(models.Model):
     title = models.CharField(max_length=50)
-    created_by = models.ForeignKey(
+    user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
 

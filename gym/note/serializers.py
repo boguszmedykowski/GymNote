@@ -4,7 +4,7 @@ from .models import *
 class WorkoutSerializer(serializers.ModelSerializer):
     class Meta:
         model = Workout
-        fields = ['id', 'title', 'link', 'created_by', 'created_at', 'description']
+        fields = ['id', 'title', 'link', 'user', 'created_at', 'description']
         read_only_fields = ['id']
 
 
@@ -12,6 +12,7 @@ class WorkoutSerializer(serializers.ModelSerializer):
 class WorkoutDetailSerializer(WorkoutSerializer):
     class Meta(WorkoutSerializer.Meta):
         fields = WorkoutSerializer.Meta.fields + ['description']
+        read_only_fields = WorkoutSerializer.Meta.read_only_fields
 
 
 class ExerciseSerializer(serializers.ModelSerializer):
