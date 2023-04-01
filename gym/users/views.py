@@ -14,7 +14,7 @@ from rest_framework.settings import api_settings
 
 class CreateUserView(generics.CreateAPIView):
     serializer_class = UserSerializer
-    permission_classes = [permissions.AllowAny]
+    # permission_classes = [permissions.AllowAny]
 
 
 class CreateTokenView(ObtainAuthToken):
