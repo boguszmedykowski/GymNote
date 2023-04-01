@@ -7,6 +7,7 @@ class Workout(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
+        blank=True,
 
     )
     created_at = models.DateField(auto_now_add=True)
