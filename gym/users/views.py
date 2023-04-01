@@ -14,6 +14,7 @@ from rest_framework.settings import api_settings
 
 class CreateUserView(generics.CreateAPIView):
     serializer_class = UserSerializer
+    permission_classes = [permissions.AllowAny]
 
 
 class CreateTokenView(ObtainAuthToken):
@@ -28,4 +29,6 @@ class ManageUserView(generics.RetrieveUpdateAPIView):
     def get_object(self):
         """Retrieve and retun the authenticated user"""
         return self.request.user
+
+
 
