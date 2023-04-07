@@ -5,12 +5,13 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
 
-from ..models import Workout
+from ..models import Workout, Exercise
 
 from ..serializers import (
     WorkoutSerializer,
     WorkoutDetailSerializer,
 )
+
 
 
 NOTE_URL = reverse('note:workout-list')
@@ -79,8 +80,6 @@ class PrivateWorkoutApiTests(TestCase):
         self.assertEqual(res.data, serializer.data)
 
 
-
-
     def test_get_workout_detail(self):
         """Test get workout detail."""
         workout = create_workout(user=self.user)
@@ -91,3 +90,56 @@ class PrivateWorkoutApiTests(TestCase):
         serializer = WorkoutDetailSerializer(workout)
         self.assertEqual(res.data, serializer.data)
 
+
+    def test_create_workout(self):
+        """Test creating a workout."""
+        payload = {
+            'title': 'Sample workout',
+            'description': 'Sample description',
+            'link': 'http://example.com/workout.pdf',
+        }
+        res = self.client.post(NOTE_URL, payload)
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        workout = Workout.objects.get(id=res.data['id'])
+        for k, v in payload.items():
+            self.assertEqual(getattr(workout, k), v)
+            self.assertEqual(workout.user, self.user)
+
+
+    def test_partial_update(self):
+        """Test partial update of a workout."""
+        original_link = 'https://example.com/workout.pdf'
+        workout = create_workout(
+            user=self.user,
+            title='Sample workout title',
+            link=original_link,
+        )
+        payload = {'title': 'New workout title'}
+        url = detail_url(workout.id)
+        res = self.client.patch(url, payload)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        workout.refresh_from_db()
+        self.assertEqual(workout.title, payload['title'])
+        self.assertEqual(workout.link, original_link)
+        self.assertEqual(workout.user, self.user)
+
+    def test_full_update(self):
+        """Test full update of workout."""
+        workout = create_workout(
+            user=self.user,
+            title='Sample workout title',
+            link='https://exmaple.com/workout.pdf',
+            description='Sample workout description.',
+        )
+        payload = {
+            'title': 'New workout title',
+            'link': 'https://example.com/new-workout.pdf',
+            'description': 'New workout description',
+        }
+        url = detail_url(workout.id)
+        res = self.client.put(url, payload)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        workout.refresh_from_db()
+        for k, v in payload.items():
+            self.assertEqual(getattr(workout, k), v)
+        self.assertEqual(workout.user, self.user)
