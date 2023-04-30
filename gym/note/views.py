@@ -8,6 +8,8 @@ from rest_framework import (
 )
 
 
+
+
 class WorkoutViewSet(viewsets.ModelViewSet):
 
     serializer_class = WorkoutDetailSerializer
