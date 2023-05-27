@@ -6,8 +6,6 @@ from django.utils.translation import gettext as _
 from rest_framework import serializers
 
 
-
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
@@ -16,7 +14,8 @@ class UserSerializer(serializers.ModelSerializer):
         # lookup_field = 'id'
 
     def create(self, validated_data):
-        return get_user_model().objects.create_user(**validated_data)
+        return get_user_model()\
+            .objects.create_user(**validated_data)  # type: ignore
 
     def update(self, instance, validated_data):
         password = validated_data.pop('password', None)

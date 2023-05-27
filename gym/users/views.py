@@ -29,4 +29,3 @@ class ManageUserView(generics.RetrieveUpdateAPIView):
     def get_object(self):
         """Retrieve and retun the authenticated user"""
         return self.request.user
-
