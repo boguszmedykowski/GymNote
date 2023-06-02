@@ -15,6 +15,7 @@ Zacząłem pisać rest api we frameworku Django wykorzystująć PostgreSQL. Apli
 - Inni osoby mogą obserować danego użytkownika podglądać jego plany treningowe.
 - Aplikacja będzie obsługiwać dodawanie zdjęć.
 
+
 1.Wstęp
 -Cel pracy
 -Opis problemu
