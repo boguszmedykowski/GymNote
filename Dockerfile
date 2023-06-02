@@ -18,8 +18,5 @@ RUN pip install -r requirements.txt
 # Otwórz port 8888
 EXPOSE 8888
 
-# uruchom testy
-CMD ["python", "manage.py", "test"]
-
 # Uruchom serwer Django
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8888"]
