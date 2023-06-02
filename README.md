@@ -1,4 +1,8 @@
-# drf-app
+# GymNone
+Aplikacja służąca do zapisywania progresu w treningu kulturystycznym.
+Składa się z backendu Django RestFramework, oraz frontendu we Flutterze
+
+
 Stwórz plik zmień nazwę pliku 'gym/gym/example.env' na 'gym/gym/.env'
 uruchom projekt na porcie 8888
 
