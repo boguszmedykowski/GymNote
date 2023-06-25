@@ -3,8 +3,18 @@ Aplikacja służąca do zapisywania progresu w treningu kulturystycznym.
 Składa się z backendu Django RestFramework, oraz frontendu we Flutterze
 
 
-Stwórz plik zmień nazwę pliku 'gym/gym/example.env' na 'gym/gym/.env'
+#How to run backend with docker
+1.w katalogu zawierającym dockerfile
+docker build -t nazwa_obrazu .
+docker run -p 8888:8888 nazwa_obrazu
+
+gotowe
+
+
+zmień nazwę pliku 'gym/gym/example.env' na 'gym/gym/.env'
 uruchom projekt na porcie 8888
+
+
 
 Jako pracę inżynierską chciałbym napisać oraz opisać aplikację webową wraz z jej deploymentem do usługi chmurowej.
 Zacząłem pisać rest api we frameworku Django wykorzystująć PostgreSQL. Aplikacja będzie zdokeryzowana. Napisałbym też do niej prosty front.
@@ -106,11 +116,12 @@ docker save my-image > my-image.tar
 docker load < my-image.tar
 
 
-
+#django
 ./manage.py collectstatic
 gunicorn gym.wsgi:application --bind 0.0.0.0:8888
 
 
+#git
 git ls-files
 git rm plik
 git push --force origin main
@@ -119,3 +130,6 @@ git checkout -b nazwa
 
 git fetch
 git reset --hard origin/<nazwa_gałęzi>
+
+
+
