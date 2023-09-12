@@ -6,12 +6,13 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # Skopiuj pliki wymagane do uruchomienia projektu
-COPY backend/gym/requirements.txt /code/gym/
-COPY backend/gym /code/gym/
+COPY gym/requirements.txt /code/gym/
+COPY gym /code/gym/
 
 # Ustaw katalog roboczy
 WORKDIR /code/gym
-
+#aktualizuj pip
+RUN pip install --upgrade pip
 # Zainstaluj wymagane biblioteki
 RUN pip install -r requirements.txt
 

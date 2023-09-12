@@ -4,11 +4,16 @@ Składa się z backendu Django RestFramework, oraz frontendu we Flutterze
 
 
 #How to run backend with docker
-1.w katalogu zawierającym dockerfile
+1.w katalogu zawierającym dockerfile backend/
 docker build -t nazwa_obrazu .
 docker run -p 8888:8888 nazwa_obrazu
 
-gotowe
+
+docker run -p 8888:8888 nazwa_obrazu
+docker ps -a
+docker exec -it container_id sh
+
+jesteś w konsoli kontenera możesz wpisywać djangowe polecenia
 
 
 zmień nazwę pliku 'gym/gym/example.env' na 'gym/gym/.env'
@@ -110,7 +115,7 @@ coverage html
 docker build -t nazwa_obrazu .
 docker run -p 8888:8888 nazwa_obrazu
 docker ps -a
-docker exec -it nazwa_kontenera sh
+docker exec -it container_id sh
 
 docker save my-image > my-image.tar
 docker load < my-image.tar
