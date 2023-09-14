@@ -15,7 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  Future<void> loginUser(BuildContext context) async {
+  Future<void> loginPage(BuildContext context) async {
     final String email = emailController.text;
     final String password = passwordController.text;
 
@@ -93,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () =>
-                  loginUser(context), // Wywołanie funkcji loginUser
+                  loginPage(context), // Wywołanie funkcji loginUser
               child: const Text('Zaloguj'),
             ),
           ],

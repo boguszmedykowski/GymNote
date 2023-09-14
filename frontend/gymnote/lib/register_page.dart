@@ -2,6 +2,7 @@ import 'dart:convert' show jsonEncode;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:gymnote/api.dart' as api;
+import 'package:gymnote/login_page.dart'; // Dodaj import do pliku login_page.dart
 
 class RegisterPage extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
@@ -64,7 +65,13 @@ class RegisterPage extends StatelessWidget {
               TextButton(
                 child: const Text('OK'),
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pop(); // Zamknij dialog rejestracji
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          LoginScreen(), // Przejdź do strony logowania
+                    ),
+                  );
                 },
               ),
             ],
