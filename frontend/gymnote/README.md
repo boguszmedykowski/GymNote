@@ -3,7 +3,7 @@
 #how to run
 
 #in main catalog:
-fluttern pub get
+flutter pub get
 
 flutter run
 

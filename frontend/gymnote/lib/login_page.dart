@@ -15,26 +15,53 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  Future<void> login() async {
-    final String email = emailController.text.trim();
-    final String password = passwordController.text.trim();
+  Future<void> loginUser(BuildContext context) async {
+    final String email = emailController.text;
+    final String password = passwordController.text;
+
+    final Map<String, String> data = {
+      'email': email,
+      'password': password,
+    };
+
+    final Uri url = Uri.parse(api.getToken);
 
     final response = await http.post(
-      Uri.parse(api.getToken),
-      body: {'email': email, 'password': password},
+      url,
+      body: jsonEncode(data),
+      headers: {'Content-Type': 'application/json'},
     );
 
     if (response.statusCode == 200) {
-      final jsonResponse = json.decode(response.body);
-      final token = jsonResponse['token'];
+      // Użytkownik został pomyślnie zalogowany
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Sukces'),
+            content: const Text('Użytkownik został zalogowany.'),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
 
       // Zapisz token API w pamięci urządzenia
+      final jsonResponse = json.decode(response.body);
+      final token = jsonResponse['token'];
       final preferences = await SharedPreferences.getInstance();
       preferences.setString('apiToken', token);
 
       // Przejdź do następnego ekranu lub wykonaj inne czynności
     } else {
       // Obsługa błędu logowania
+      // Możesz tutaj dodać odpowiednie komunikaty dla użytkownika lub inne działania w przypadku błędu.
     }
   }
 
@@ -42,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Logowanie'),
+        title: const Text('Login'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -59,13 +86,14 @@ class _LoginScreenState extends State<LoginScreen> {
             TextField(
               controller: passwordController,
               decoration: const InputDecoration(
-                labelText: 'Hasło',
+                labelText: 'Password',
               ),
               obscureText: true,
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: login,
+              onPressed: () =>
+                  loginUser(context), // Wywołanie funkcji loginUser
               child: const Text('Zaloguj'),
             ),
           ],
