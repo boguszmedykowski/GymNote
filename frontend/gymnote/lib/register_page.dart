@@ -1,5 +1,6 @@
 import 'dart:convert' show jsonEncode;
 import 'package:flutter/material.dart';
+import 'package:gymnote/user_workouts.dart';
 import 'package:http/http.dart' as http;
 import 'package:gymnote/api.dart' as api;
 import 'package:gymnote/login_page.dart'; // Dodaj import do pliku login_page.dart
@@ -69,7 +70,7 @@ class RegisterPage extends StatelessWidget {
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (BuildContext context) =>
-                          LoginScreen(), // Przejdź do strony logowania
+                          UserWorkoutsPage(), // Przejdź do strony treningów
                     ),
                   );
                 },

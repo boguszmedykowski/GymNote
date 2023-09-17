@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:gymnote/user_workouts.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:gymnote/api.dart' as api;
@@ -44,7 +45,13 @@ class _LoginScreenState extends State<LoginScreen> {
               TextButton(
                 child: const Text('OK'),
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pop(); // Zamknij dialog logowania
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          UserWorkoutsPage(), // Przejdź do strony logowania
+                    ),
+                  );
                 },
               ),
             ],
