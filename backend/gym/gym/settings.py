@@ -19,7 +19,6 @@ ALLOWED_HOSTS.extend(
     )
 )
 
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -32,10 +31,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'note',
     'users',
-    'dotenv',
 ]
-
-TESTS = 'tests'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -67,71 +63,34 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'gym.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DJANGO_DB_NAME'),
+        'USER': os.environ.get('DJANGO_DB_USER'),
+        'PASSWORD': os.environ.get('DJANGO_DB_PASSWORD'),
+        'HOST': os.environ.get('DJANGO_DB_HOST'),
+        'PORT': os.environ.get('DJANGO_DB_PORT', '5432'),
     }
 }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
-
-# AUTH_PASSWORD_VALIDATORS = [
-#     {
-#         # 'NAME': 'django.contrib.auth.password_validation.\
-#         #     UserAttributeSimilarityValidator',
-#     },
-#     {
-#         # 'NAME': 'django.contrib.auth.password_validation.\
-#         #     MinimumLengthValidator',
-#     },
-#     {
-#         # 'NAME': 'django.contrib.auth.password_validation.\
-#         #     CommonPasswordValidator',
-#     },
-#     {
-#         # 'NAME': 'django.contrib.auth.password_validation.\
-#         #     NumericPasswordValidator',
-#     },
-# ]
-
+# Reszta pliku settings.py pozostaje bez zmian
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
-
-
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, '../web/static'),]
 
 STATIC_URL = 'static/'
 
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-
-
-    # 'DEFAULT_AUTHENTICATION_CLASSES': [
-    #     'rest_framework.authentication.TokenAuthentication',
-    # ],
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.IsAuthenticated',
-    # ],
 }
-
 
 AUTH_USER_MODEL = 'users.User'
 USER_DETAILS_SERIALIZER = 'users.UserSerializer'
