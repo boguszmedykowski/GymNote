@@ -1,30 +1,39 @@
-# Use the Python 3.9 image based on Alpine Linux
-FROM python:3.9-alpine
+FROM python:3.9-alpine3.13
+LABEL maintainer="boguszmedykowski"
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# Install system dependencies
-RUN apk update && \
-    apk add --no-cache postgresql-dev && \
-    apk add --no-cache gcc musl-dev
+COPY ./requirements.txt /tmp/requirements.txt
+COPY ./requirements.dev.txt /tmp/requirements.dev.txt
+COPY ./scripts /scripts
+COPY ./app /app
+WORKDIR /app
+EXPOSE 8000
 
-# Create and set the working directory
-WORKDIR /code
+ARG DEV=false
+RUN python -m venv /py && \
+    /py/bin/pip install --upgrade pip && \
+    apk add --update --no-cache postgresql-client jpeg-dev && \
+    apk add --update --no-cache --virtual .tmp-build-deps \
+        build-base postgresql-dev musl-dev zlib zlib-dev linux-headers && \
+    /py/bin/pip install -r /tmp/requirements.txt && \
+    if [ $DEV = "true" ]; \
+        then /py/bin/pip install -r /tmp/requirements.dev.txt ; \
+    fi && \
+    rm -rf /tmp && \
+    apk del .tmp-build-deps && \
+    adduser \
+        --disabled-password \
+        --no-create-home \
+        django-user && \
+    mkdir -p /vol/web/media && \
+    mkdir -p /vol/web/static && \
+    chown -R django-user:django-user /vol && \
+    chmod -R 755 /vol && \
+    chmod -R +x /scripts
 
-# Copy the requirements file into the container
-COPY requirements.txt /code/
+ENV PATH="/scripts:/py/bin:$PATH"
 
-# Upgrade pip
-RUN pip install --upgrade pip
+USER django-user
 
-# Install Python packages from requirements.txt
-RUN pip install -r requirements.txt
-
-# Expose port 8888 (if your Django app uses this port)
-EXPOSE 8888
-
-# Define the command to run your Django application
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8888"]
-
+CMD ["run.sh"]

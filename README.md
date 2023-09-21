@@ -2,6 +2,10 @@
 Aplikacja służąca do zapisywania progresu w treningu kulturystycznym.
 Składa się z backendu Django RestFramework, oraz frontendu we Flutterze
 
+docker system prune -a
+docker build -t gymnote .
+docker-compose up
+
 
 #How to run backend with docker
 1.w katalogu zawierającym dockerfile backend/
