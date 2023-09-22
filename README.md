@@ -12,6 +12,8 @@ docker-compose up
 docker build -t nazwa_obrazu .
 docker run -p 8888:8888 nazwa_obrazu
 
+docker-compose run --rm app sh -c "python manage.py test"
+docker-compose run --rm app sh -c "python manage.py wait_for_db && python manage.py test"
 
 docker run -p 8888:8888 nazwa_obrazu
 docker ps -a
