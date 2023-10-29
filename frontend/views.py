@@ -1,12 +1,14 @@
 from flet import *
 import flet as ft
-from login import Login
-from home import Home
-from register import Register
-from appbar import create_appbar
+from pages.login import Login
+from pages.home import Home
+from pages.register import Register
+from elements.appbar import create_appbar
 
 
-def views_handler(page):
+def views_handler(page: ft.Page):
+    # page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+    # page.update()
     return {
         '/': View(
             route='/',

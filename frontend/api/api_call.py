@@ -1,7 +1,8 @@
 import requests
 
 
-URL = "http://ec2-3-92-165-17.compute-1.amazonaws.com"
+# URL = "http://ec2-3-92-165-17.compute-1.amazonaws.com"
+URL = "http://0.0.0.0:8000"
 
 s = requests.Session()
 
@@ -13,16 +14,18 @@ def get_token(email: str, password: str):
                'password': password}
 
     try:
-        response = requests.post(url, data=payload)
+        response = s.post(url, data=payload)
         response.raise_for_status()
 
         data = response.json()
         token = data['token']
 
-        headers = {"Authorization": f"Bearer {token}"}
+        headers = {"Authorization": f"Token {token}"}
 
         s.headers.update(headers)
+        print(data)
         print(response.status_code)
+        print(headers)
 
         return f"Token obtained successfully. Status Code: {response.status_code}"
 
@@ -41,9 +44,23 @@ def register(name: str, email: str, password: str):
     }
 
     try:
-        response = requests.post(url, data=payload)
+        response = s.post(url, data=payload)
 
         return f"Status Code: {response.status_code}"
+
+    except requests.exceptions.RequestException as e:
+        return f"Error: {str(e)}"
+
+
+def get_workouts():
+    url = f"{URL}/api/note/workouts/"
+    try:
+        response = s.get(url, headers=s.headers)
+        data = response.json()
+        print(response)
+        print(data)
+        print(s.headers)
+        return data
 
     except requests.exceptions.RequestException as e:
         return f"Error: {str(e)}"

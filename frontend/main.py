@@ -1,8 +1,8 @@
 import flet as ft
 from flet import *
-from pages.api_call import *
+from api.api_call import *
 from views import views_handler
-from appbar import *
+from elements.appbar import *
 
 
 def main(page: ft.Page):
@@ -15,7 +15,14 @@ def main(page: ft.Page):
         )
         pass
 
+    # back
+    def view_pop(e: ViewPopEvent):
+        page.views.pop()
+        top_view: View = page.views[-1]
+        page.go(top_view.route)
+
     page.on_route_change = route_change
+    page.on_view_pop = view_pop
     page.go('/')
 
 
