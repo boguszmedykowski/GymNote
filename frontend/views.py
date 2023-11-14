@@ -3,12 +3,11 @@ import flet as ft
 from pages.login import Login
 from pages.home import Home
 from pages.register import Register
+from pages.workouts import WorkoutsApp
 from elements.appbar import create_appbar
 
 
 def views_handler(page: ft.Page):
-    # page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-    # page.update()
     return {
         '/': View(
             route='/',
@@ -29,6 +28,13 @@ def views_handler(page: ft.Page):
             controls=[
                 create_appbar(page),
                 Register(page)
+            ]
+        ),
+        '/workouts': View(
+            route='/workouts',
+            controls=[
+                create_appbar(page),
+                WorkoutsApp(page)
             ]
         ),
     }

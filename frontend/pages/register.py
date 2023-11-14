@@ -3,15 +3,19 @@ import flet as ft
 from api.api_call import *
 
 
-class Register(UserControl):
+class Register(ft.UserControl):
     def build(self):
         self.name_field = ft.TextField(
             label='name', hint_text='name', width=400)
+
         self.email_field = ft.TextField(
             label='email', hint_text="email", width=400)
-        self.password_field = ft.TextField(label='password',
-                                           hint_text="password", password=True, width=400)
+
+        self.password_field = ft.TextField(
+            label='password', hint_text="password", password=True, width=400)
+
         self.response = ft.Column()
+
         self.login_button = ft.FloatingActionButton(
             text="register", on_click=self.add_clicked)
 

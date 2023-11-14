@@ -1,8 +1,8 @@
 import requests
 
 
-# URL = "http://ec2-3-92-165-17.compute-1.amazonaws.com"
-URL = "http://0.0.0.0:8000"
+URL = "http://ec2-54-80-52-84.compute-1.amazonaws.com"
+# URL = "http://0.0.0.0:8000"
 
 s = requests.Session()
 
@@ -61,6 +61,20 @@ def get_workouts():
         print(data)
         print(s.headers)
         return data
+
+    except requests.exceptions.RequestException as e:
+        return f"Error: {str(e)}"
+
+
+def create_workout(title: str):
+    url = f"{URL}/api/note/workouts/"
+    payload = {
+        'title': title
+    }
+    try:
+        response = s.post(url, headers=s.headers, data=payload)
+
+        return f"status Code: {response.status_code}"
 
     except requests.exceptions.RequestException as e:
         return f"Error: {str(e)}"
