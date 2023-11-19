@@ -4,6 +4,9 @@ from api.api_call import *
 
 
 class Login(UserControl):
+    def __init__(self, page):
+        super().__init__()
+
     def build(self):
         self.email_field = ft.TextField(
             label='email', hint_text="email", width=400)
@@ -43,8 +46,12 @@ class Login(UserControl):
         )
         return self.view
 
-    def add_clicked(self, e):
-        self.response.value = f"'{self.email_field.value}', '{get_token(email=self.email_field.value, password=self.password_field.value)}"
+    def add_clicked(self, page):
+        self.response.value = f"{get_token(email=self.email_field.value, password=self.password_field.value)}"
         self.response.controls.append(ft.Text(value=self.response.value))
         self.email_field.value = ""
         self.update()
+        if self.response.value == "Token obtained successfully. Status Code: 200":
+            self.page.go("/workouts")
+        else:
+            pass
