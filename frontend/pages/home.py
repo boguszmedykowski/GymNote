@@ -4,31 +4,24 @@ from api.api_call import get_workouts
 
 
 class Home(ft.UserControl):
+    def __init__(self, page):
+        super().__init__()
+
+        self.page = page
 
     def build(self):
-        self.text = ft.TextField(label="home site")
-        self.workouts_button = ft.TextButton(
-            text="Workouts", on_click=self.add_clicked)
-        self.workouts_list = ft.Column()
 
-        return ft.Column()
+        cl = ft.Column(
+            spacing=10,
+            height=600,
+            width=float("inf"),
+            scroll=ft.ScrollMode.ALWAYS,
+        )
+        for i in range(0, 100):
+            cl.controls.append(ft.Text(f"Text line {i}"))
 
-        # return ft.Column(
-        #     [
-        #         ft.Row(
-        #             [self.workouts_button],
-        #             alignment=ft.MainAxisAlignment.CENTER
-        #         ),
-        #         ft.Row(
-        #             [self.workouts_list],
-        #             alignment=ft.MainAxisAlignment.CENTER
-        #         )
-
-        #     ]
-        # )
-
-    def add_clicked(self, e):
-        self.workouts_list.value = f"{get_workouts()}"
-        self.workouts_list.controls.append(
-            ft.Text(value=self.workouts_list.value))
-        self.update()
+        return ft.Column(
+            [
+                ft.Container(cl, border=ft.border.all(1)),
+            ]
+        )

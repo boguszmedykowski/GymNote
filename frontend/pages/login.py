@@ -7,11 +7,13 @@ class Login(UserControl):
     def __init__(self, page):
         super().__init__()
 
+        self.page = page
+
     def build(self):
         self.email_field = ft.TextField(
-            label='email', hint_text="email", width=400)
+            label='email', hint_text="email", width=300)
         self.password_field = ft.TextField(label='password',
-                                           hint_text="password", password=True, width=400)
+                                           hint_text="password", password=True, width=300)
         self.response = ft.Column()
         self.login_button = ft.FloatingActionButton(
             text="Login", on_click=self.add_clicked)
@@ -51,7 +53,8 @@ class Login(UserControl):
         self.response.controls.append(ft.Text(value=self.response.value))
         self.email_field.value = ""
         self.update()
-        if self.response.value == "Token obtained successfully. Status Code: 200":
+        self.page.session.set("token", self.response.value)
+        if self.response.value != "Error":
             self.page.go("/workouts")
         else:
             pass

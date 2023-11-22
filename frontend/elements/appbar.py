@@ -7,8 +7,9 @@ def create_appbar(page):
         e.control.checked = not e.control.checked
         page.update()
 
-    def logout():
-        pass
+    def logout(e):
+        page.session.clear()
+        page.go('/login')
 
     appbar = ft.AppBar(
         leading_width=40,
@@ -32,7 +33,7 @@ def create_appbar(page):
                         text="Sign up", on_click=lambda _: page.go('/register')),
                     ft.PopupMenuItem(),  # divider
                     ft.PopupMenuItem(
-                        text="Logout", on_click=lambda _: page.go('/register')),
+                        text="Logout", on_click=logout),
                     ft.PopupMenuItem(),  # divider
                     ft.PopupMenuItem(
                         text="Checked item", checked=False, on_click=check_item_clicked

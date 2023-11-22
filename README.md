@@ -1,6 +1,6 @@
 # GymNone
 Aplikacja służąca do zapisywania progresu w treningu kulturystycznym.
-Składa się z backendu Django RestFramework, oraz frontendu we Flutterze
+Składa się z backendu Django RestFramework, oraz frontendu w frameworku Flet
 
 docker system prune -a
 docker build -t gymnote .
@@ -9,9 +9,10 @@ docker-compose up
 
 #How to run backend with docker
 1.w katalogu zawierającym dockerfile backend/
-docker build -t nazwa_obrazu .
-docker run -p 8888:8888 nazwa_obrazu
+docker-compose build
+docker-compose up
 
+uruchomienie testów
 docker-compose run --rm app sh -c "python manage.py test"
 docker-compose run --rm app sh -c "python manage.py wait_for_db && python manage.py test"
 
@@ -21,9 +22,6 @@ docker exec -it container_id sh
 
 jesteś w konsoli kontenera możesz wpisywać djangowe polecenia
 
-
-zmień nazwę pliku 'gym/gym/example.env' na 'gym/gym/.env'
-uruchom projekt na porcie 8888
 
 
 
