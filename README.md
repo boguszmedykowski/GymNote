@@ -1,38 +1,15 @@
-# GymNone
+# GymNote
 Aplikacja służąca do zapisywania progresu w treningu kulturystycznym.
 Składa się z backendu Django RestFramework, oraz frontendu w frameworku Flet
+znajduje się na stronie https://inzynierka.fly.dev
 
-docker system prune -a
-docker build -t gymnote .
-docker-compose up
-
-
-#How to run backend with docker
-1.w katalogu zawierającym dockerfile backend/
-docker-compose build
-docker-compose up
-
-uruchomienie testów
-docker-compose run --rm app sh -c "python manage.py test"
-docker-compose run --rm app sh -c "python manage.py wait_for_db && python manage.py test"
-
-docker run -p 8888:8888 nazwa_obrazu
-docker ps -a
-docker exec -it container_id sh
-
-jesteś w konsoli kontenera możesz wpisywać djangowe polecenia
-
-
-
-
-Jako pracę inżynierską chciałbym napisać oraz opisać aplikację webową wraz z jej deploymentem do usługi chmurowej.
-Zacząłem pisać rest api we frameworku Django wykorzystująć PostgreSQL. Aplikacja będzie zdokeryzowana. Napisałbym też do niej prosty front.
-- Założeniem jest portal społecznościowy na którym użytkownicy mogą tworzyć rozbudowane plany treningowe kulturystyczne.
+Roadmap:
+- Każdy użytkownik ma dostęp do swojej bazy treningów
 - Użytkownik może używać strony jako notes do ćwiczeń.
-- Może podać i śledzić w czasie parametry ciała.
-- Przeglądać wiele wykresów dotyczących jego treningu.
-- Inni osoby mogą obserować danego użytkownika podglądać jego plany treningowe.
-- Aplikacja będzie obsługiwać dodawanie zdjęć.
+- Może podać i śledzić w czasie parametry swojego ciała.
+- Przeglądać wykresy dotyczących jego treningu.
+- Dodawać zdjęcia
+
 
 
 1.Wstęp
@@ -59,7 +36,7 @@ Zacząłem pisać rest api we frameworku Django wykorzystująć PostgreSQL. Apli
 -Planowanie i koordynacja prac
 
 
-5.Implementacja
+5. Implementacja
 -Konfiguracja środowiska z wykorzystaniem Docker
 -Realizacja poszczególnych funkcjonalności z wykorzystaniem Django
 -Integracja z REST API i bazą danych PostgreSQL
@@ -67,7 +44,7 @@ Zacząłem pisać rest api we frameworku Django wykorzystująć PostgreSQL. Apli
 -Testowanie i debugowanie
 -Dokumentacja kodu
 
-6.Testowanie i walidacja
+6. Testowanie i walidacja
 -Testy jednostkowe i integracyjne
 -Testy użytkownika
 -Analiza wyników
@@ -124,6 +101,26 @@ docker exec -it container_id sh
 docker save my-image > my-image.tar
 docker load < my-image.tar
 
+
+docker system prune -a
+docker build -t gymnote .
+docker-compose up
+
+
+#How to run backend with docker
+1.w katalogu zawierającym dockerfile backend/
+docker-compose build
+docker-compose up
+
+uruchomienie testów
+docker-compose run --rm app sh -c "python manage.py test"
+docker-compose run --rm app sh -c "python manage.py wait_for_db && python manage.py test"
+
+docker run -p 8888:8888 nazwa_obrazu
+docker ps -a
+docker exec -it container_id sh
+
+jesteś w konsoli kontenera możesz wpisywać djangowe polecenia
 
 #django
 ./manage.py collectstatic

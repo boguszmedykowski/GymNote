@@ -6,8 +6,6 @@ from elements.appbar import *
 
 def main(page: ft.Page):
 
-    page.scroll = 'always'
-
     def route_change(route):
         print(page.route)
         page.views.clear()
@@ -17,7 +15,7 @@ def main(page: ft.Page):
         pass
 
     page.on_route_change = route_change
-    page.go('/register')
+    page.go('/login')
 
 
 ft.app(target=main, view=ft.WEB_BROWSER)

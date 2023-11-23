@@ -1,5 +1,5 @@
 import requests
-
+import json
 
 URL = "http://ec2-54-80-52-84.compute-1.amazonaws.com"
 # URL = "http://0.0.0.0:8000"
@@ -55,19 +55,23 @@ def get_workouts(token: str):
         return f"Error: {str(e)}"
 
 
-def create_workout(token: str, title: str):
+def create_workout(token: str, title: str, exercises: list):
     url = f"{URL}/api/note/workouts/"
 
-    headers = {'Authorization': f'Token {token}'}
-    payload = {
-        'title': title
-    }
+    headers = {'Content-Type': 'application/json',
+               'Authorization': f'Token {token}'}
+    payload = json.dumps({
+        "title": title,
+        "exercises": exercises
+    })
     try:
         response = requests.post(url, headers=headers, data=payload)
 
+        print(response.json())
         return f"status Code: {response.status_code}"
 
     except requests.exceptions.RequestException as e:
+        print(str(e))
         return f"Error: {str(e)}"
 
 
@@ -77,6 +81,7 @@ def get_workout(token: str, id: int):
         headers = {'Authorization': f'Token {token}'}
         response = requests.get(url, headers=headers)
         data = response.json()
+        print(data)
         return data
     except requests.exceptions.RequestException as e:
         return f"{str(e)}"

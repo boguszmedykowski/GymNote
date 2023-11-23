@@ -11,11 +11,8 @@ class WorkoutsApp(ft.UserControl):
     def build(self):
         self.get_workouts_dict = get_workouts(self.page.session.get('token'))
 
-        self.workout_title = ft.TextField(
-            label='new workout title', hint_text='workout title', width=400)
-
         self.add_workout_button = ft.FloatingActionButton(
-            text=" + ", on_click=lambda _: self.page.go("/new_workout")
+            text=" + new wokout", on_click=lambda _: self.page.go("/new_workout")
         )
 
         self.workout_list = ft.Column(
@@ -42,8 +39,7 @@ class WorkoutsApp(ft.UserControl):
 
         return ft.Column(
             [
-                ft.Row([self.add_workout_button,
-                        self.workout_title]),
+                ft.Row([self.add_workout_button]),
                 self.response,
 
                 ft.Container(self.workout_list, border=ft.border.all(1)),
@@ -52,7 +48,7 @@ class WorkoutsApp(ft.UserControl):
 
     def workout_panel(self, e, id):
         self.page.session.set("trening_id", id)
-        print(self.page.session.get("trening_id"), f"{id} ugagaga")
+        print(self.page.session.get("trening_id"), f"{id}")
         self.page.go("/edit_workout")
 
     def add_workout_clicked(self, e):
@@ -88,21 +84,41 @@ class EditWorkout(ft.UserControl):
         return self.view
 
 
-class NewWorkout(ft.UserControl):
-    def __init__(self, page):
-        super().__init__()
+def new_workout(page: ft.Page):
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    workout_title = ft.TextField(hint_text="workout title")
+    exercises_column = ft.Column([])
+    exercise_list = []
 
-        self.page = page
-
-    def build(self):
-
-        self.view = ft.Column(
-            [
-                ft.Row([ft.TextField(label="title")],
-                       alignment=ft.MainAxisAlignment.CENTER),
-                ft.Row([ft.ElevatedButton(text="Add Exercise")],
-                       alignment=ft.MainAxisAlignment.CENTER),
-            ],
+    def add_exercise(e):
+        exercise_field = ft.TextField(hint_text="exercise name")
+        exercises_column.controls.append(
+            ft.Row([exercise_field],
+                   alignment=ft.MainAxisAlignment.CENTER)
         )
+        page.update()
 
-        return self.view
+    def save(e):
+        for row in exercises_column.controls:
+            for text in row.controls:
+                exercise_list.append({"name": text.value,
+                                      "description": ""})
+        print(exercise_list)
+
+        create_workout(page.session.get("token"),
+                       workout_title.value,
+                       exercise_list)
+        page.go('/workouts')
+
+    return ft.Column(
+        [
+            ft.Row([workout_title,
+                    ft.ElevatedButton(text=" + exercise",
+                                      on_click=add_exercise),
+                    ], alignment=ft.MainAxisAlignment.CENTER),
+            exercises_column,
+            ft.ElevatedButton(text="save", on_click=save)
+
+        ],
+        alignment=ft.MainAxisAlignment.CENTER
+    )

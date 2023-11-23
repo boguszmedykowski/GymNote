@@ -3,25 +3,26 @@ import flet as ft
 from api.api_call import get_workouts
 
 
-class Home(ft.UserControl):
-    def __init__(self, page):
-        super().__init__()
+def licznik(page: ft.Page):
+    page.title = "Flet counter example"
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
-        self.page = page
+    txt_number = ft.TextField(
+        value="0", text_align=ft.TextAlign.RIGHT, width=100)
 
-    def build(self):
+    def minus_click(e):
+        txt_number.value = str(int(txt_number.value) - 1)
+        page.update()
 
-        cl = ft.Column(
-            spacing=10,
-            height=600,
-            width=float("inf"),
-            scroll=ft.ScrollMode.ALWAYS,
-        )
-        for i in range(0, 100):
-            cl.controls.append(ft.Text(f"Text line {i}"))
+    def plus_click(e):
+        txt_number.value = str(int(txt_number.value) + 1)
+        page.update()
 
-        return ft.Column(
-            [
-                ft.Container(cl, border=ft.border.all(1)),
-            ]
-        )
+    return ft.Row(
+        [
+            ft.IconButton(ft.icons.REMOVE, on_click=minus_click),
+            txt_number,
+            ft.IconButton(ft.icons.ADD, on_click=plus_click),
+        ],
+        alignment=ft.MainAxisAlignment.CENTER,
+    )

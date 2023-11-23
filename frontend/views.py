@@ -1,21 +1,19 @@
 from flet import *
 import flet as ft
 from pages.login import Login
-from pages.home import Home
+from pages.home import licznik
 from pages.register import Register
-from pages.workouts import WorkoutsApp, EditWorkout, NewWorkout
+from pages.workouts import WorkoutsApp, EditWorkout, new_workout
 from elements.appbar import create_appbar
 
 
 def views_handler(page: ft.Page):
-    page.scroll = 'always'
-    page.scroll = ft.ScrollMode.ALWAYS
     return {
         '/': View(
             route='/',
             controls=[
                 create_appbar(page),
-                Home(page)
+                new_workout(page)
             ]
         ),
         '/login': View(
@@ -50,7 +48,7 @@ def views_handler(page: ft.Page):
             route='/new_workout',
             controls=[
                 create_appbar(page),
-                NewWorkout(page)
+                new_workout(page)
             ]
         ),
     }
