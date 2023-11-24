@@ -8,13 +8,14 @@ class Register(ft.UserControl):
         super().__init__()
 
     def add_clicked(self, e):
-        self.response.value = f"{register(name=self.name_field.value, email=self.email_field.value, password=self.password_field.value)}"
+        self.response.value = register(
+            name=self.name_field.value, email=self.email_field.value, password=self.password_field.value)
         self.login = get_token(email=self.email_field.value,
                                password=self.password_field.value)
         self.response.controls.append(ft.Text(value=self.response.value))
         self.email_field.value = ""
         self.update()
-        if self.login == 201:
+        if self.response.value == 201:
             self.page.go('/workouts')
         else:
             pass
