@@ -14,7 +14,7 @@ class Register(ft.UserControl):
         self.response.controls.append(ft.Text(value=self.response.value))
         self.email_field.value = ""
         self.update()
-        if self.login == 200:
+        if self.login == 201:
             self.page.go('/workouts')
         else:
             pass
