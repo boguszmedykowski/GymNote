@@ -1,5 +1,6 @@
 import requests
 import json
+import flet as ft
 
 URL = "http://ec2-54-80-52-84.compute-1.amazonaws.com"
 # URL = "http://0.0.0.0:8000"
@@ -38,18 +39,6 @@ def register(name: str, email: str, password: str):
         response = requests.post(url, data=payload)
 
         return f"Status Code: {response.status_code}"
-
-    except requests.exceptions.RequestException as e:
-        return f"Error: {str(e)}"
-
-
-def get_workouts(token: str):
-    url = f"{URL}/api/note/workouts/"
-    try:
-        headers = {'Authorization': f'Token {token}'}
-        response = requests.get(url, headers=headers)
-        data = response.json()
-        return data
 
     except requests.exceptions.RequestException as e:
         return f"Error: {str(e)}"

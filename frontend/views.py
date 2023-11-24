@@ -3,7 +3,7 @@ import flet as ft
 from pages.login import Login
 from pages.home import Counter
 from pages.register import Register
-from pages.workouts import WorkoutsApp, EditWorkout, new_workout
+from pages.workouts import WorkoutsApp, EditWorkout, NewWorkout
 from elements.appbar import create_appbar
 
 
@@ -13,7 +13,7 @@ def views_handler(page: ft.Page):
             route='/',
             controls=[
                 create_appbar(page),
-                Counter()
+                Counter(page)
             ]
         ),
         '/login': View(
@@ -48,7 +48,7 @@ def views_handler(page: ft.Page):
             route='/new_workout',
             controls=[
                 create_appbar(page),
-                new_workout(page)
+                NewWorkout(page)
             ]
         ),
     }
