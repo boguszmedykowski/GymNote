@@ -1,5 +1,5 @@
 import flet as ft
-from api.api_call import *
+from api.api_call import create_workout, get_workouts, get_workout
 
 
 class WorkoutsApp(ft.UserControl):
@@ -14,26 +14,14 @@ class WorkoutsApp(ft.UserControl):
         self.page.go("/edit_workout")
 
     def add_workout_clicked(self, e):
-        self.response.value = f"{create_workout(self.page.session.get('token'), title=self.workout_title.value)}'"
+        self.response.value = f"{create_workout(self.token, title=self.workout_title.value)}'"
 
         self.response.controls.append(ft.Text(value=self.response.value))
         self.workout_title.value = ""
         self.update()
 
-    def get_workouts(self):
-        url = f"{URL}/api/note/workouts/"
-        try:
-            headers = {
-                'Authorization': f'Token {self.token}'}
-            response = requests.get(url, headers=headers)
-            data = response.json()
-            return data
-
-        except requests.exceptions.RequestException as e:
-            return f"Error: {str(e)}"
-
     def build(self):
-        self.get_workouts_dict = self.get_workouts()
+        self.get_workouts_dict = get_workouts(self.token)
         ft.FloatingActionButton(
             text=" + new wokout", on_click=lambda _: self.page.go("/new_workout")
         )
@@ -60,12 +48,14 @@ class WorkoutsApp(ft.UserControl):
             [
                 ft.Row([
                     ft.FloatingActionButton(
-                        text=" + new wokout", on_click=lambda _: self.page.go("/new_workout")
+                        text="new wokout", width=150, on_click=lambda _: self.page.go("/new_workout")
                     )
-                ]),
+                ],
+                    alignment=ft.MainAxisAlignment.CENTER),
                 self.response,
 
-                ft.Container(self.workout_list),
+                ft.Row([self.workout_list],
+                       alignment=ft.MainAxisAlignment.CENTER),
             ]
         )
 
@@ -78,7 +68,7 @@ class EditWorkout(ft.UserControl):
 
     def build(self):
         self.id = self.page.session.get("trening_id")
-        self.data = get_workout(self.page.session.get("token"),
+        self.data = get_workout(self.token,
                                 self.id)
 
         self.title = self.data["title"]

@@ -74,3 +74,16 @@ def get_workout(token: str, id: int):
         return data
     except requests.exceptions.RequestException as e:
         return f"{str(e)}"
+
+
+def get_workouts(token):
+    url = f"{URL}/api/note/workouts/"
+    try:
+        headers = {
+            'Authorization': f'Token {token}'}
+        response = requests.get(url, headers=headers)
+        data = response.json()
+        return data
+
+    except requests.exceptions.RequestException as e:
+        return f"Error: {str(e)}"

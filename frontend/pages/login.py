@@ -25,11 +25,17 @@ class Login(UserControl):
         self.password_field = ft.TextField(label='password',
                                            hint_text="password", password=True, width=300)
         self.response = ft.Column()
-        self.login_button = ft.FloatingActionButton(
+        self.login_button = ft.ElevatedButton(
             text="Login", on_click=self.add_clicked)
 
         self.view = ft.Column(
             [
+                ft.Row(
+                    [
+                        ft.ElevatedButton(
+                            text="Sign in", on_click=lambda _: self.page.go('/register')),
+                    ],
+                    alignment=ft.MainAxisAlignment.CENTER),
                 ft.Row(
                     [
                         self.email_field,
