@@ -92,7 +92,8 @@ class NewWorkout(ft.UserControl):
         self.token = self.page.session.get("token")
 
     def add_exercise(self, e):
-        self.exercise_field = ft.TextField(hint_text="exercise name")
+        self.exercise_field = ft.TextField(
+            hint_text="exercise name", label=" exercise name")
         self.exercises_column.controls.append(
             ft.Row([self.exercise_field],
                    alignment=ft.MainAxisAlignment.CENTER)
@@ -104,27 +105,31 @@ class NewWorkout(ft.UserControl):
             for text in row.controls:
                 self.exercise_list.append({"name": text.value,
                                            "description": ""})
-        print(self.exercise_list)
 
-        create_workout(self.token,
-                       self.workout_title.value,
-                       self.exercise_list)
-        self.page.go('/workouts')
+        response = create_workout(self.token,
+                                  self.workout_title.value,
+                                  self.exercise_list)
+        print(response)
+        if response == 201:
+            self.page.go('/workouts')
 
     def build(self):
         self.page.vertical_alignment = ft.MainAxisAlignment.CENTER
-        self.workout_title = ft.TextField(hint_text="workout title")
+        self.workout_title = ft.TextField(
+            hint_text="workout title", label=" workout title")
         self.exercises_column = ft.Column([])
         self.exercise_list = []
 
         return ft.Column(
             [
-                ft.Row([self.workout_title,
-                        ft.ElevatedButton(text=" + exercise",
+                ft.Row([self.workout_title],
+                       alignment=ft.MainAxisAlignment.CENTER),
+                ft.Row([ft.ElevatedButton(text=" + exercise",
                                           on_click=self.add_exercise),
                         ], alignment=ft.MainAxisAlignment.CENTER),
                 self.exercises_column,
-                ft.ElevatedButton(text="save", on_click=self.save)
+                ft.Row([ft.ElevatedButton(text="save", on_click=self.save)],
+                       alignment=ft.MainAxisAlignment.CENTER)
 
             ],
             alignment=ft.MainAxisAlignment.CENTER

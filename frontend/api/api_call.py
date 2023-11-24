@@ -8,17 +8,13 @@ URL = "http://ec2-54-80-52-84.compute-1.amazonaws.com"
 
 def get_token(email: str, password: str):
     url = f"{URL}/api/user/token/"
-
     payload = {'email': email,
                'password': password}
-
     try:
         response = requests.post(url, data=payload)
         response.raise_for_status()
-
         data = response.json()
         token = data['token']
-
         return token
 
     except requests.exceptions.RequestException as e:
@@ -34,11 +30,9 @@ def register(name: str, email: str, password: str):
         'email': email,
         'password': password
     }
-
     try:
         response = requests.post(url, data=payload)
-
-        return f"Status Code: {response.status_code}"
+        return response.status_code
 
     except requests.exceptions.RequestException as e:
         return f"Error: {str(e)}"
@@ -46,7 +40,6 @@ def register(name: str, email: str, password: str):
 
 def create_workout(token: str, title: str, exercises: list):
     url = f"{URL}/api/note/workouts/"
-
     headers = {'Content-Type': 'application/json',
                'Authorization': f'Token {token}'}
     payload = json.dumps({
@@ -57,7 +50,7 @@ def create_workout(token: str, title: str, exercises: list):
         response = requests.post(url, headers=headers, data=payload)
 
         print(response.json())
-        return f"status Code: {response.status_code}"
+        return response.status_code
 
     except requests.exceptions.RequestException as e:
         print(str(e))

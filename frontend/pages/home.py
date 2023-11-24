@@ -11,8 +11,6 @@ class Counter(ft.UserControl):
     def add_click(self, e):
         self.counter += 1
         self.text.value = str(self.counter)
-        self.my_row.controls.append(
-            ft.Text(value=f"{self.page.session.get('token')}"))
         self.update()
 
     def minus_click(self, e):
