@@ -11,11 +11,8 @@ class Login(UserControl):
 
     def login_clicked(self, e):
         self.response.value = f"{get_token(email=self.email_field.value, password=self.password_field.value)}"
-        # self.response.controls.append(ft.Text(value=self.response.value))
         self.email_field.value = ""
         self.page.session.set("token", self.response.value)
-        self.snack_bar = ft.SnackBar(ft.Text(f"Hello"))
-        self.snack_bar.open = True
         self.update()
 
         if self.response.value != "Error":
@@ -24,10 +21,6 @@ class Login(UserControl):
             pass
 
     def build(self):
-        self.snack_bar = ft.SnackBar(
-            content=ft.Text("Hello, world!"),
-            action="Alright!",
-        )
         self.email_field = ft.TextField(
             label='email', hint_text="email", width=300)
         self.password_field = ft.TextField(label='password',
@@ -68,7 +61,6 @@ class Login(UserControl):
                     ],
                     alignment=ft.MainAxisAlignment.CENTER,
                 ),
-                self.snack_bar
             ]
         )
         return self.view
